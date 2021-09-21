@@ -1,25 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useCallback, useState } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import AutoForm from "components/AutoForm";
+import { AutoFormFieldDefinition } from "definitions";
 
 function App() {
+  const [form, setForm] = useState<{ [key: string]: any }>({});
+
+  const onChange = useCallback(
+    (value: any, label: string) => {
+      setForm((prevState) => ({ ...prevState, [label]: value }));
+    },
+    [setForm]
+  );
+
+  const fieldDefinitions: AutoFormFieldDefinition[] = [
+    { label: "Name", onChange, type: "input", validate: (value) => true },
+  ];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AutoForm
+      minWidth={300}
+      onSubmit={() => {}}
+      fieldDefinitions={fieldDefinitions}
+    />
   );
 }
 
