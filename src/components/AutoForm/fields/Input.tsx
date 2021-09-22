@@ -1,24 +1,24 @@
 import { AutoFormFieldDefinition } from "definitions";
 import React from "react";
-import styled from "styled-components";
 import FieldContainer from "../styled-components/FieldContainer";
 import Label from "../styled-components/Label";
+import StyledInput from "../../styled-components/Input";
 
-const StyledInput = styled.input`
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid lightgrey;
-  :focus {
-    outline-color: lightblue;
-  }
-`;
+export interface FieldProps extends AutoFormFieldDefinition {
+  onChange: (name: string, value: any) => void;
+  name: string;
+  value: any;
+}
 
-const Input = (props: AutoFormFieldDefinition) => {
+const Input = (props: FieldProps) => {
+  const { label, onChange, name, value } = props;
+
   return (
     <FieldContainer>
-      <Label>{props.label}</Label>
+      <Label>{label}</Label>
       <StyledInput
-        onChange={(e) => props.onChange(e.target.value, props.label)}
+        value={value ?? ""}
+        onChange={(e) => onChange(name, e.target.value)}
       />
     </FieldContainer>
   );
