@@ -29,7 +29,7 @@ const StyledCard = styled(Card)`
   min-width: 400px;
 
   @media (max-width: 425px) {
-    width: 80%;
+    min-width: 80%;
   }
 `;
 
